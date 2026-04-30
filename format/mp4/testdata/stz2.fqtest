@@ -195,15 +195,15 @@ $ fq -d mp4 'dv' stz2.mp4
 0x1c0|                                          00 00|              ..|                              size: 71 0x1ce-0x1d2 (4)
 0x1d0|00 47                                          |.G              |
 0x1d0|      6d 70 34 61                              |  mp4a          |                              type: "mp4a" (MPEG-4 Audio) 0x1d2-0x1d6 (4)
-0x1d0|                  00 00 00 00 00 00            |      ......    |                              reserved: raw bits 0x1d6-0x1dc (6)
+0x1d0|                  00 00 00 00 00 00            |      ......    |                              reserved0: raw bits 0x1d6-0x1dc (6)
 0x1d0|                                    00 01      |            ..  |                              data_reference_index: 1 0x1dc-0x1de (2)
-0x1d0|                                          00 00|              ..|                              version: 0 0x1de-0x1e0 (2)
-0x1e0|00 00                                          |..              |                              revision_level: 0 0x1e0-0x1e2 (2)
-0x1e0|      00 00 00 00                              |  ....          |                              max_packet_size: 0 0x1e2-0x1e6 (4)
-0x1e0|                  00 02                        |      ..        |                              num_audio_channels: 2 0x1e6-0x1e8 (2)
+0x1d0|                                          00 00|              ..|                              reserved1: 0 0x1de-0x1e2 (4)
+0x1e0|00 00                                          |..              |
+0x1e0|      00 00 00 00                              |  ....          |                              reserved2: 0 0x1e2-0x1e6 (4)
+0x1e0|                  00 02                        |      ..        |                              channel_count: 2 0x1e6-0x1e8 (2)
 0x1e0|                        00 10                  |        ..      |                              sample_size: 16 0x1e8-0x1ea (2)
-0x1e0|                              00 00            |          ..    |                              compression_id: 0 0x1ea-0x1ec (2)
-0x1e0|                                    00 00      |            ..  |                              packet_size: 0 0x1ec-0x1ee (2)
+0x1e0|                              00 00            |          ..    |                              pre_defined: 0 0x1ea-0x1ec (2)
+0x1e0|                                    00 00      |            ..  |                              reserved3: 0 0x1ec-0x1ee (2)
 0x1e0|                                          ac 44|              .D|                              sample_rate: 44100 0x1ee-0x1f2 (4)
 0x1f0|00 00                                          |..              |
      |                                               |                |                              boxes[0:1]: 0x1f2-0x215 (35)

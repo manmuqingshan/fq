@@ -215,7 +215,7 @@ $ fq -d mp4 dv prores_frame.mov
       |                                               |                |                            [0]{}: box 0x6e12-0x6e82 (112)
 0x6e10|      00 00 00 70                              |  ...p          |                              size: 112 0x6e12-0x6e16 (4)
 0x6e10|                  61 70 34 68                  |      ap4h      |                              type: "ap4h" (Apple ProRes 4444) 0x6e16-0x6e1a (4)
-0x6e10|                              00 00 00 00 00 00|          ......|                              reserved: raw bits 0x6e1a-0x6e20 (6)
+0x6e10|                              00 00 00 00 00 00|          ......|                              reserved0: raw bits 0x6e1a-0x6e20 (6)
 0x6e20|00 01                                          |..              |                              data_reference_index: 1 0x6e20-0x6e22 (2)
 0x6e20|      00 00                                    |  ..            |                              version: 0 0x6e22-0x6e24 (2)
 0x6e20|            00 00                              |    ..          |                              revision_level: 0 0x6e24-0x6e26 (2)

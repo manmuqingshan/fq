@@ -203,7 +203,7 @@ $ fq -d mp4 dv hevc.mp4
 0x0a20|                              00 00 09 b3      |          ....  |                              size: 2483 0xa2a-0xa2e (4)
 0x0a20|                                          68 65|              he|                              type: "hev1" (High Efficiency Video Coding) 0xa2e-0xa32 (4)
 0x0a30|76 31                                          |v1              |
-0x0a30|      00 00 00 00 00 00                        |  ......        |                              reserved: raw bits 0xa32-0xa38 (6)
+0x0a30|      00 00 00 00 00 00                        |  ......        |                              reserved0: raw bits 0xa32-0xa38 (6)
 0x0a30|                        00 01                  |        ..      |                              data_reference_index: 1 0xa38-0xa3a (2)
 0x0a30|                              00 00            |          ..    |                              version: 0 0xa3a-0xa3c (2)
 0x0a30|                                    00 00      |            ..  |                              revision_level: 0 0xa3c-0xa3e (2)

@@ -191,7 +191,7 @@ $ fq dv in24.mp4
 0x2f0|                                       00 00 00|             ...|                              size: 114 0x2fd-0x301 (4)
 0x300|72                                             |r               |
 0x300|   69 6e 32 34                                 | in24           |                              type: "in24" 0x301-0x305 (4)
-0x300|               00 00 00 00 00 00               |     ......     |                              reserved: raw bits 0x305-0x30b (6)
+0x300|               00 00 00 00 00 00               |     ......     |                              reserved0: raw bits 0x305-0x30b (6)
 0x300|                                 00 01         |           ..   |                              data_reference_index: 1 0x30b-0x30d (2)
 0x300|                                       00 01   |             .. |                              version: 1 0x30d-0x30f (2)
 0x300|                                             00|               .|                              revision_level: 0 0x30f-0x311 (2)

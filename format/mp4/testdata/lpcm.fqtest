@@ -192,7 +192,7 @@ $ fq dv lpcm.mp4
      |                                               |                |                            [0]{}: box 0x435-0x495 (96)
 0x430|               00 00 00 60                     |     ...`       |                              size: 96 0x435-0x439 (4)
 0x430|                           6c 70 63 6d         |         lpcm   |                              type: "lpcm" 0x439-0x43d (4)
-0x430|                                       00 00 00|             ...|                              reserved: raw bits 0x43d-0x443 (6)
+0x430|                                       00 00 00|             ...|                              reserved0: raw bits 0x43d-0x443 (6)
 0x440|00 00 00                                       |...             |
 0x440|         00 01                                 |   ..           |                              data_reference_index: 1 0x443-0x445 (2)
 0x440|               00 02                           |     ..         |                              version: 2 0x445-0x447 (2)

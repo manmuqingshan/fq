@@ -162,7 +162,7 @@ $ fq dv png_no_hdlr.mp4
      |                                               |                |                            [0]{}: box 0x1a0-0x250 (176)
 0x1a0|00 00 00 b0                                    |....            |                              size: 176 0x1a0-0x1a4 (4)
 0x1a0|            6d 70 34 76                        |    mp4v        |                              type: "mp4v" (MPEG-4 Visual) 0x1a4-0x1a8 (4)
-0x1a0|                        00 00 00 00 00 00      |        ......  |                              reserved: raw bits 0x1a8-0x1ae (6)
+0x1a0|                        00 00 00 00 00 00      |        ......  |                              reserved0: raw bits 0x1a8-0x1ae (6)
 0x1a0|                                          00 01|              ..|                              data_reference_index: 1 0x1ae-0x1b0 (2)
 0x1b0|00 00                                          |..              |                              version: 0 0x1b0-0x1b2 (2)
 0x1b0|      00 00                                    |  ..            |                              revision_level: 0 0x1b2-0x1b4 (2)
