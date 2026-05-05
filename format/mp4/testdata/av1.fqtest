@@ -185,7 +185,7 @@ $ fq -d mp4 dv av1.mp4
 0x1360|                           00 00 00 8b         |         ....   |                              size: 139 0x1369-0x136d (4)
 0x1360|                                       61 76 30|             av0|                              type: "av01" (AV1 video) 0x136d-0x1371 (4)
 0x1370|31                                             |1               |
-0x1370|   00 00 00 00 00 00                           | ......         |                              reserved: raw bits 0x1371-0x1377 (6)
+0x1370|   00 00 00 00 00 00                           | ......         |                              reserved0: raw bits 0x1371-0x1377 (6)
 0x1370|                     00 01                     |       ..       |                              data_reference_index: 1 0x1377-0x1379 (2)
 0x1370|                           00 00               |         ..     |                              version: 0 0x1379-0x137b (2)
 0x1370|                                 00 00         |           ..   |                              revision_level: 0 0x137b-0x137d (2)

@@ -201,7 +201,7 @@ $ fq -d mp4 dv mpeg2.mp4
 0x2140|                                             00|               .|                              size: 156 0x214f-0x2153 (4)
 0x2150|00 00 9c                                       |...             |
 0x2150|         6d 70 34 76                           |   mp4v         |                              type: "mp4v" (MPEG-4 Visual) 0x2153-0x2157 (4)
-0x2150|                     00 00 00 00 00 00         |       ......   |                              reserved: raw bits 0x2157-0x215d (6)
+0x2150|                     00 00 00 00 00 00         |       ......   |                              reserved0: raw bits 0x2157-0x215d (6)
 0x2150|                                       00 01   |             .. |                              data_reference_index: 1 0x215d-0x215f (2)
 0x2150|                                             00|               .|                              version: 0 0x215f-0x2161 (2)
 0x2160|00                                             |.               |

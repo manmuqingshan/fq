@@ -218,15 +218,15 @@ $ fq -d mp4 dv dash_audio_init.mp4
 0x210|                                          00 00|              ..|                              size: 158 0x21e-0x222 (4)
 0x220|00 9e                                          |..              |
 0x220|      65 6e 63 61                              |  enca          |                              type: "enca" (Encrypted/Protected audio) 0x222-0x226 (4)
-0x220|                  00 00 00 00 00 00            |      ......    |                              reserved: raw bits 0x226-0x22c (6)
+0x220|                  00 00 00 00 00 00            |      ......    |                              reserved0: raw bits 0x226-0x22c (6)
 0x220|                                    00 01      |            ..  |                              data_reference_index: 1 0x22c-0x22e (2)
-0x220|                                          00 00|              ..|                              version: 0 0x22e-0x230 (2)
-0x230|00 00                                          |..              |                              revision_level: 0 0x230-0x232 (2)
-0x230|      00 00 00 00                              |  ....          |                              max_packet_size: 0 0x232-0x236 (4)
-0x230|                  00 01                        |      ..        |                              num_audio_channels: 1 0x236-0x238 (2)
+0x220|                                          00 00|              ..|                              reserved1: 0 0x22e-0x232 (4)
+0x230|00 00                                          |..              |
+0x230|      00 00 00 00                              |  ....          |                              reserved2: 0 0x232-0x236 (4)
+0x230|                  00 01                        |      ..        |                              channel_count: 1 0x236-0x238 (2)
 0x230|                        00 10                  |        ..      |                              sample_size: 16 0x238-0x23a (2)
-0x230|                              00 00            |          ..    |                              compression_id: 0 0x23a-0x23c (2)
-0x230|                                    00 00      |            ..  |                              packet_size: 0 0x23c-0x23e (2)
+0x230|                              00 00            |          ..    |                              pre_defined: 0 0x23a-0x23c (2)
+0x230|                                    00 00      |            ..  |                              reserved3: 0 0x23c-0x23e (2)
 0x230|                                          ac 44|              .D|                              sample_rate: 44100 0x23e-0x242 (4)
 0x240|00 00                                          |..              |
      |                                               |                |                              boxes[0:2]: 0x242-0x2bc (122)

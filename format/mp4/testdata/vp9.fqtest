@@ -184,7 +184,7 @@ $ fq -d mp4 dv vp9.mp4
 0x1700|                                       00 00 00|             ...|                              size: 132 0x170d-0x1711 (4)
 0x1710|84                                             |.               |
 0x1710|   76 70 30 39                                 | vp09           |                              type: "vp09" (VP9 video) 0x1711-0x1715 (4)
-0x1710|               00 00 00 00 00 00               |     ......     |                              reserved: raw bits 0x1715-0x171b (6)
+0x1710|               00 00 00 00 00 00               |     ......     |                              reserved0: raw bits 0x1715-0x171b (6)
 0x1710|                                 00 01         |           ..   |                              data_reference_index: 1 0x171b-0x171d (2)
 0x1710|                                       00 00   |             .. |                              version: 0 0x171d-0x171f (2)
 0x1710|                                             00|               .|                              revision_level: 0 0x171f-0x1721 (2)

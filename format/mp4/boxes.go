@@ -580,7 +580,7 @@ func decodeBox(ctx *decodeContext, d *decode.D, typ string) {
 	case "stbl":
 		decodeBoxes(ctx, d)
 	case "stsd":
-		d.FieldU8("version")
+		stsdVersion := d.FieldU8("version")
 		d.FieldU24("flags")
 		entryCount := d.FieldU32("entry_count")
 		var i uint64
@@ -613,67 +613,120 @@ func decodeBox(ctx *decodeContext, d *decode.D, typ string) {
 				}
 
 				d.FramedFn(int64(size-8)*8, func(d *decode.D) {
-					d.FieldRawLen("reserved", 6*8)
+					d.FieldRawLen("reserved0", 6*8)
 					d.FieldU16("data_reference_index")
 
 					switch subType {
 					case "soun", "vide":
-						version := d.FieldU16("version")
-						d.FieldU16("revision_level")
-						d.FieldU32("max_packet_size") // TODO: vendor for some subtype?
-
 						switch subType {
 						case "soun":
-							// AudioSampleEntry
-							// https://developer.apple.com/library/archive/documentation/QuickTime/QTFF/QTFFChap3/qtff3.html#//apple_ref/doc/uid/TP40000939-CH205-SW1
 							var numAudioChannels uint64
-							switch version {
-							case 0:
-								numAudioChannels = d.FieldU16("num_audio_channels")
-								d.FieldU16("sample_size")
-								d.FieldU16("compression_id")
-								d.FieldU16("packet_size")
-								d.FieldFP32("sample_rate")
-								if d.BitsLeft() > 0 {
-									decodeBoxes(ctx, d)
+							// same condition as ffmpeg mov.c uses (strcmp(type, "qt  "))
+							isISOM := ctx.rootBox().ftypMajorBrand != "qt"
+
+							if isISOM {
+								switch stsdVersion {
+								case 0:
+									// AudioSampleEntry
+									// const unsigned int(32)[2] reserved = 0;
+									// template unsigned int(16) channelcount = 2;
+									// template unsigned int(16) samplesize = 16;
+									// unsigned int(16) pre_defined = 0;
+									// const unsigned int(16) reserved = 0 ;
+									// template unsigned int(32) samplerate = { default samplerate of media}<<16;
+									d.FieldU32("reserved1")
+									d.FieldU32("reserved2")
+									numAudioChannels = d.FieldU16("channel_count")
+									d.FieldU16("sample_size")
+									d.FieldU16("pre_defined")
+									d.FieldU16("reserved3")
+									d.FieldFP32("sample_rate")
+									if d.BitsLeft() > 0 {
+										decodeBoxes(ctx, d)
+									}
+								case 1:
+									// AudioSampleEntryV1
+									// unsigned int(16) entry_version; // must be 1, and must be in an stsd with version ==1
+									// const unsigned int(16)[3] reserved = 0;
+									// template unsigned int(16) channelcount; // must be correct
+									// template unsigned int(16) samplesize = 16;
+									// unsigned int(16) pre_defined = 0;
+									// const unsigned int(16) reserved = 0 ;
+									// template unsigned int(32) samplerate = 1<<16;
+									d.FieldU16("entry_version")
+									d.FieldU16("reserved1")
+									d.FieldU16("reserved2")
+									d.FieldU16("reserved3")
+									numAudioChannels = d.FieldU16("channel_count")
+									d.FieldU16("sample_size")
+									d.FieldU16("pre_defined")
+									d.FieldU16("reserved4")
+									d.FieldFP32("sample_rate")
+									if d.BitsLeft() > 0 {
+										decodeBoxes(ctx, d)
+									}
+								default:
+									d.FieldRawLen("data", d.BitsLeft())
 								}
-							case 1:
-								numAudioChannels = d.FieldU16("num_audio_channels")
-								d.FieldU16("sample_size")
-								d.FieldU16("compression_id")
-								d.FieldU16("packet_size")
-								d.FieldFP32("sample_rate")
-								d.FieldU32("samples_per_packet")
-								d.FieldU32("bytes_per_packet")
-								d.FieldU32("bytes_per_frame")
-								d.FieldU32("bytes_per_sample")
-								if d.BitsLeft() > 0 {
-									decodeBoxes(ctx, d)
+							} else {
+								version := d.FieldU16("version")
+								d.FieldU16("revision_level")
+								d.FieldU32("max_packet_size") // TODO: vendor for some subtype?
+
+								// AudioSampleEntry
+								// https://developer.apple.com/library/archive/documentation/QuickTime/QTFF/QTFFChap3/qtff3.html#//apple_ref/doc/uid/TP40000939-CH205-SW1
+								switch version {
+								case 0:
+									numAudioChannels = d.FieldU16("num_audio_channels")
+									d.FieldU16("sample_size")
+									d.FieldU16("compression_id")
+									d.FieldU16("packet_size")
+									d.FieldFP32("sample_rate")
+									if d.BitsLeft() > 0 {
+										decodeBoxes(ctx, d)
+									}
+								case 1:
+									numAudioChannels = d.FieldU16("num_audio_channels")
+									d.FieldU16("sample_size")
+									d.FieldU16("compression_id")
+									d.FieldU16("packet_size")
+									d.FieldFP32("sample_rate")
+									d.FieldU32("samples_per_packet")
+									d.FieldU32("bytes_per_packet")
+									d.FieldU32("bytes_per_frame")
+									d.FieldU32("bytes_per_sample")
+									if d.BitsLeft() > 0 {
+										decodeBoxes(ctx, d)
+									}
+								case 2:
+									d.FieldU16("always_3")
+									d.FieldU16("always_16")
+									d.FieldU16("always_minus_2") // TODO: as in const -2?
+									d.FieldU16("always_0")
+									d.FieldU32("always_65536")
+									d.FieldU32("size_of_struct_only")
+									d.FieldF64("audio_sample_rate")
+									numAudioChannels = d.FieldU32("num_audio_channels")
+									d.FieldU32("always_7f000000")
+									d.FieldU32("const_bits_per_channel")
+									d.FieldU32("format_specific_flags")
+									d.FieldU32("const_bytes_per_audio_packet")
+									d.FieldU32("const_lpcm_frames_per_audio_packet")
+									if d.BitsLeft() > 0 {
+										decodeBoxes(ctx, d)
+									}
+								default:
+									d.FieldRawLen("data", d.BitsLeft())
 								}
-							case 2:
-								d.FieldU16("always_3")
-								d.FieldU16("always_16")
-								d.FieldU16("always_minus_2") // TODO: as in const -2?
-								d.FieldU16("always_0")
-								d.FieldU32("always_65536")
-								d.FieldU32("size_of_struct_only")
-								d.FieldF64("audio_sample_rate")
-								numAudioChannels = d.FieldU32("num_audio_channels")
-								d.FieldU32("always_7f000000")
-								d.FieldU32("const_bits_per_channel")
-								d.FieldU32("format_specific_flags")
-								d.FieldU32("const_bytes_per_audio_packet")
-								d.FieldU32("const_lpcm_frames_per_audio_packet")
-								if d.BitsLeft() > 0 {
-									decodeBoxes(ctx, d)
-								}
-							default:
-								d.FieldRawLen("data", d.BitsLeft())
 							}
 							if track != nil {
 								track.stsdNumAudioChannels = numAudioChannels
 							}
 						case "vide":
+							version := d.FieldU16("version")
+							d.FieldU16("revision_level")
+							d.FieldU32("max_packet_size") // TODO: vendor for some subtype?
+
 							// VideoSampleEntry
 							// TODO: version 0 and 1 same?
 							switch version {
@@ -1893,6 +1946,10 @@ func decodeBox(ctx *decodeContext, d *decode.D, typ string) {
 		d.FieldU24("flags")
 		d.FieldU8("format_flags")
 		d.FieldU8("sample_size")
+	case "srat":
+		d.FieldU8("version")
+		d.FieldU24("flags")
+		d.FieldU32("sample_rate")
 	case "chnl":
 		version := d.FieldU8("version")
 		d.FieldU24("flags")

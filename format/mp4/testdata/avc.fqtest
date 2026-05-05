@@ -203,7 +203,7 @@ $ fq -d mp4 dv avc.mp4
 0x0f20|                              00 00 00 b0      |          ....  |                              size: 176 0xf2a-0xf2e (4)
 0x0f20|                                          61 76|              av|                              type: "avc1" (Advanced Video Coding) 0xf2e-0xf32 (4)
 0x0f30|63 31                                          |c1              |
-0x0f30|      00 00 00 00 00 00                        |  ......        |                              reserved: raw bits 0xf32-0xf38 (6)
+0x0f30|      00 00 00 00 00 00                        |  ......        |                              reserved0: raw bits 0xf32-0xf38 (6)
 0x0f30|                        00 01                  |        ..      |                              data_reference_index: 1 0xf38-0xf3a (2)
 0x0f30|                              00 00            |          ..    |                              version: 0 0xf3a-0xf3c (2)
 0x0f30|                                    00 00      |            ..  |                              revision_level: 0 0xf3c-0xf3e (2)

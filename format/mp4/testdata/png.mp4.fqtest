@@ -202,7 +202,7 @@ $ fq dv png.mp4
      |                                               |                |                            [0]{}: box 0x232-0x2e2 (176)
 0x230|      00 00 00 b0                              |  ....          |                              size: 176 0x232-0x236 (4)
 0x230|                  6d 70 34 76                  |      mp4v      |                              type: "mp4v" (MPEG-4 Visual) 0x236-0x23a (4)
-0x230|                              00 00 00 00 00 00|          ......|                              reserved: raw bits 0x23a-0x240 (6)
+0x230|                              00 00 00 00 00 00|          ......|                              reserved0: raw bits 0x23a-0x240 (6)
 0x240|00 01                                          |..              |                              data_reference_index: 1 0x240-0x242 (2)
 0x240|      00 00                                    |  ..            |                              version: 0 0x242-0x244 (2)
 0x240|            00 00                              |    ..          |                              revision_level: 0 0x244-0x246 (2)
